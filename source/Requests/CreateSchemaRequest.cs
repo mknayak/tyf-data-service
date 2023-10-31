@@ -1,5 +1,4 @@
-﻿using System;
-using tyf.data.service.Models;
+﻿using tyf.data.service.Models;
 
 namespace tyf.data.service.Requests
 {

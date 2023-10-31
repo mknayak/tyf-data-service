@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace tyf.data.service.Models.Account
+﻿namespace tyf.data.service.Models.Account
 {
     public class AccessRoleModel
     {

@@ -1,11 +1,10 @@
-﻿using System;
-using tyf.data.service.Requests;
+﻿using tyf.data.service.Requests;
 using tyf.data.service.Models;
 using tyf.data.service.Models.Account;
 
 namespace tyf.data.service.Repositories
 {
-	public interface IUserRepository
+    public interface IUserRepository
 	{
 		public UserModel CreateUser(CreateUserRequest userRequest);
 		public UserModel ValidateUser(AuthenticateUserRequest authenticateUserRequest);//return usertoken

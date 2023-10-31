@@ -1,6 +1,4 @@
-﻿using tyf.data.service.Models;
-
-namespace tyf.data.service.Models;
+﻿namespace tyf.data.service.Models;
 
 public class FieldTypeListModel
 {

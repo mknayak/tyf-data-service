@@ -1,7 +1,6 @@
-﻿using System;
-namespace tyf.data.service.Requests
+﻿namespace tyf.data.service.Requests
 {
-	public class InstallApplicationModel
+    public class InstallApplicationModel
 	{
 		public string ApplicationName { get; set; }
 		public CreateUserRequest RootUser { get; set; }

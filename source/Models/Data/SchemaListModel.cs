@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace tyf.data.service.Models
+﻿namespace tyf.data.service.Models
 {
     public class SchemaListModel : IListModel<SchemaModel>
     {

@@ -1,7 +1,6 @@
-﻿using System;
-namespace tyf.data.service.Requests
+﻿namespace tyf.data.service.Requests
 {
-	public class FilterInstanceRequest
+    public class FilterInstanceRequest
 	{
 		public required string Namespace { get; set; }
 	}

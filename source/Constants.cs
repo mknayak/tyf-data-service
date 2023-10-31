@@ -1,7 +1,6 @@
-﻿using System;
-namespace tyf.data.service
+﻿namespace tyf.data.service
 {
-	public static class Constants
+    public static class Constants
 	{
 		public static class ErrorCodes
 		{

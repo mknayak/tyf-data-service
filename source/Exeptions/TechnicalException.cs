@@ -1,9 +1,8 @@
-﻿using System;
-using tyf.data.service.Extensions;
+﻿using tyf.data.service.Extensions;
 
 namespace tyf.data.service.Exeptions
 {
-	public class TechnicalException:Exception
+    public class TechnicalException:Exception
 	{
 		public string ErrorCode { get; set; }
 		public TechnicalException(string errorCode,string errorMessage):base(errorMessage)

@@ -1,7 +1,6 @@
-﻿using System;
-namespace tyf.data.service.Models
+﻿namespace tyf.data.service.Models
 {
-	public enum ConfigType
+    public enum ConfigType
 	{
 		All=0,
 		System=1,

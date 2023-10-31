@@ -1,7 +1,6 @@
-﻿using System;
-namespace tyf.data.service.Extensions
+﻿namespace tyf.data.service.Extensions
 {
-	public static class Helpers
+    public static class Helpers
 	{
 		public static string ValidNamespace(string input)
 		{

@@ -1,5 +1,4 @@
-﻿using System;
-namespace tyf.data.service.Requests
+﻿namespace tyf.data.service.Requests
 {
     public class CreateFieldTypeRequest
 	{

@@ -1,19 +1,16 @@
-﻿using System;
-using tyf.data.service.DbModels;
+﻿using tyf.data.service.DbModels;
 using tyf.data.service.Requests;
 using tyf.data.service.Models;
 using tyf.data.service.Managers;
-using System.Security.Principal;
 using tyf.data.service.Exeptions;
 using tyf.data.service.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using tyf.data.service.Models.Account;
-using System.Text.RegularExpressions;
 
 namespace tyf.data.service.Repositories
 {
-	public class UserRepository:IUserRepository
+    public class UserRepository:IUserRepository
 	{
         private readonly TyfDataContext dbContext;
         private readonly ISecurityManager securityManager;

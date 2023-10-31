@@ -3,23 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1706.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "source", "source\tyf.data.service.csproj", "{EB2283EF-231B-42AA-BE13-2B690C1C7E07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tyf.data.service", "source\tyf.data.service.csproj", "{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}"
 EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EB2283EF-231B-42AA-BE13-2B690C1C7E07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB2283EF-231B-42AA-BE13-2B690C1C7E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB2283EF-231B-42AA-BE13-2B690C1C7E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB2283EF-231B-42AA-BE13-2B690C1C7E07}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39595DE5-0DD7-47DB-BD58-CB0CC7CE7ED8}
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Debug|x64.Build.0 = Debug|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Release|x64.ActiveCfg = Release|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Release|x64.Build.0 = Release|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF5D5695-DE5A-4E4B-BEE5-F696DDB69330}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

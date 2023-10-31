@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using tyf.data.service.DbModels;
 using tyf.data.service.Exeptions;
@@ -11,7 +9,7 @@ using tyf.data.service.Models;
 namespace tyf.data.service.Repositories
 {
     public class InstanceRepository: IInstanceRepository
-    { 
+    {
         private readonly TyfDataContext dbContext;
         private readonly ErrorMessages messages;
 
@@ -19,6 +17,48 @@ namespace tyf.data.service.Repositories
 		{
             this.dbContext = dbContext;
             this.messages = messageOptions.Value;
+        }
+
+        public bool BulkCreateInstances(BulkCreateInstanceRequest bulkCreateInstanceRequest)
+        {
+            var schemaId= bulkCreateInstanceRequest.SchemaId;
+            var requests = bulkCreateInstanceRequest.Instances;
+            var schema = dbContext.DataSchemas.Include(c=>c.SchemaFields).FirstOrDefault(x=>x.SchemaId==schemaId);
+            if (null == schema)
+            {
+                throw new TechnicalException(messages.Format(Constants.ErrorCodes.Repository.EntityNotFound,"Schema"));
+            }
+            foreach (var request in requests)
+            {
+                SchemaInstance entity = new SchemaInstance
+                {
+                    SchemaInstanceId = Guid.NewGuid(),
+                    SchemaId = schema.SchemaId,
+                    SchemaInstanceNamespace= bulkCreateInstanceRequest.Namespace,
+                    SchemaInstanceName = request.Name,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now
+                };
+                dbContext.SchemaInstances.Add(entity);
+                foreach (var item in request.Fields)
+                {
+                    var fschema = schema.SchemaFields.FirstOrDefault(c => c.SchemaFieldName == item.Key);
+                    if (null != fschema)
+                    {
+                        entity.SchemaData.Add(new SchemaDatum
+                        {
+                            SchemaDataId = Guid.NewGuid(),
+                            SchemaFieldId = fschema.SchemaFieldId,
+                            SchemaInstanceId = entity.SchemaInstanceId,
+                            SchemeDataValue = item.Value,
+                            CreatedDate = DateTime.Now,
+                            UpdatedDate = DateTime.Now
+                        });
+                    }
+                }
+            }
+            dbContext.SaveChanges();
+            return true;
         }
 
         public SchemaInstanceModel CreateInstance(CreateInstanceRequest request)

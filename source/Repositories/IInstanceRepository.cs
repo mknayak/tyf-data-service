@@ -12,6 +12,8 @@ namespace tyf.data.service.Repositories
         public SchemaInstanceModel UpdateInstance(UpdateInstanceRequest request);
         public SchemaInstanceModel GetInstance(Guid instanceId);
 
+        public bool BulkCreateInstances(BulkCreateInstanceRequest request);
+
     }
 }
 

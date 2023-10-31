@@ -1,7 +1,6 @@
-﻿using System;
-namespace tyf.data.service.Models.Data
+﻿namespace tyf.data.service.Models.Data
 {
-	public class SettingModel
+    public class SettingModel
 	{
         public string SettingItemKey { get; set; } = null!;
 

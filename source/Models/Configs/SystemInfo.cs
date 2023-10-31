@@ -1,5 +1,4 @@
-﻿using System;
-namespace tyf.data.service.Models.Configs
+﻿namespace tyf.data.service.Models.Configs
 {
     public class BasicSystemInfo
     {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace tyf.data.service.DbModels;
+﻿namespace tyf.data.service.DbModels;
 
 public partial class AccessGroup
 {

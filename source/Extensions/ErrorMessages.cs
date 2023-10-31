@@ -1,7 +1,6 @@
-﻿using System;
-namespace tyf.data.service.Extensions
+﻿namespace tyf.data.service.Extensions
 {
-	public class ErrorMessages:Dictionary<string,string>
+    public class ErrorMessages:Dictionary<string,string>
 	{
 		public const string Key = "ErrorMessages";
 

@@ -1,7 +1,6 @@
-﻿using System;
-namespace tyf.data.service.Requests
+﻿namespace tyf.data.service.Requests
 {
-	public class UploadCsvRequest
+    public class UploadCsvRequest
 	{
 		public string Separator { get; set; } = ",";
 		public IFormFile File { get; set; } = null!;
