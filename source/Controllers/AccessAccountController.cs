@@ -14,10 +14,20 @@ namespace tyf.data.service.Controllers
     {
         private readonly IUserRepository userRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccessAccountController"/> class.
+        /// </summary>
+        /// <param name="userRepository">The user repository.</param>
         public AccessAccountController(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
         }
+
+        /// <summary>
+        /// Creates a new user.
+        /// </summary>
+        /// <param name="request">The create user request.</param>
+        /// <returns>The newly created user model.</returns>
         [HttpPost()]
         public UserModel Post([FromBody] CreateUserRequest request)
         {
@@ -25,7 +35,11 @@ namespace tyf.data.service.Controllers
             return model;
         }
 
-
+        /// <summary>
+        /// Searches for users by name.
+        /// </summary>
+        /// <param name="name">The name to search for.</param>
+        /// <returns>A list of user models that match the search criteria.</returns>
         [HttpGet("search/{name}")]
         public UserModelList Search(string name)
         {
@@ -33,7 +47,11 @@ namespace tyf.data.service.Controllers
             return model;
         }
 
-       
+        /// <summary>
+        /// Gets a user by ID.
+        /// </summary>
+        /// <param name="id">The ID of the user to get.</param>
+        /// <returns>The user model.</returns>
         [HttpGet("{id}")]
         public UserModel Get(Guid id)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using tyf.data.service.DbModels;
 using tyf.data.service.Extensions;
 using tyf.data.service.Managers;
@@ -18,7 +19,8 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IConfigurationRepository, ConfigurationRepository>();
 builder.Services.AddTransient<ISecurityManager, SecurityManager>();
 builder.Services.AddTransient<ICsvManager, CsvManager>();
-
+builder.Services.AddTransient<ICacheManager, CacheManager>();
+builder.Services.AddMemoryCache();
 builder.Services.AddDbContext<TyfDataContext>(option =>
 {
     option.UseNpgsql(builder.Configuration.GetConnectionString("dataDbConnection"));
@@ -27,14 +29,19 @@ builder.Services.Configure<ErrorMessages>(
     builder.Configuration.GetSection(ErrorMessages.Key));
 builder.Services.Configure<SecurityOption>(
     builder.Configuration.GetSection(SecurityOption.Key));
-
+builder.Services.AddSwaggerGen(c =>
+    {
+        c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory,
+            $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 {
+    
     app.UseSwagger();
-    app.UseSwaggerUI();
+   // app.UseSwaggerUI();
 }
 app.UseDefaultFiles();
 app.UseStaticFiles();
