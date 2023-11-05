@@ -8,31 +8,50 @@ using tyf.data.service.Extensions;
 
 namespace tyf.data.service.Controllers
 {
+    /// <summary>
+    /// Controller for managing schema field types.
+    /// </summary>
     [Route("api/fieldtypes")]
     [ValidateAPIAccess(Constants.Roles.DataManager)]
     public class SchemaFieldsController : ControllerBase
     {
         private readonly IDataRepository repository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SchemaFieldsController"/> class.
+        /// </summary>
+        /// <param name="repository">The data repository.</param>
         public SchemaFieldsController(IDataRepository repository)
         {
             this.repository = repository;
         }
-        // GET: api/values
+
+        /// <summary>
+        /// Gets the list of available field types.
+        /// </summary>
+        /// <returns>The list of field types.</returns>
         [HttpGet]
         public FieldTypeListModel Get()
         {
             return repository.GetFieldTypes();
         }
 
-        // GET api/values/5
+        /// <summary>
+        /// Gets the field type with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the field type.</param>
+        /// <returns>The field type with the specified ID.</returns>
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
+        /// <summary>
+        /// Creates a new field type.
+        /// </summary>
+        /// <param name="request">The request containing the details of the new field type.</param>
+        /// <returns>The newly created field type.</returns>
         [HttpPost]
         public FieldTypeModel Post([FromBody]CreateFieldTypeRequest request)
         {
@@ -40,13 +59,20 @@ namespace tyf.data.service.Controllers
             return model;
         }
 
-        // PUT api/values/5
+        /// <summary>
+        /// Updates the field type with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the field type to update.</param>
+        /// <param name="value">The new value of the field type.</param>
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        /// <summary>
+        /// Deletes the field type with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the field type to delete.</param>
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

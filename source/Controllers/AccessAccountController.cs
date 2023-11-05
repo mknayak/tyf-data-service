@@ -4,10 +4,12 @@ using tyf.data.service.Models;
 using tyf.data.service.Repositories;
 using tyf.data.service.Requests;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace tyf.data.service.Controllers
 {
+    
+    /// <summary>
+    /// Controller for managing user access accounts.
+    /// </summary>
     [Route("api/[controller]")]
     [ValidateAPIAccess(Constants.Roles.UserManager)]
     public class AccessAccountController : ControllerBase
@@ -41,7 +43,7 @@ namespace tyf.data.service.Controllers
         /// <param name="name">The name to search for.</param>
         /// <returns>A list of user models that match the search criteria.</returns>
         [HttpGet("search/{name}")]
-        public UserModelList Search(string name)
+        public UserInfoList Search(string name)
         {
             var model = userRepository.SearchUsers(name);
             return model;
@@ -58,6 +60,52 @@ namespace tyf.data.service.Controllers
             var model = userRepository.GetUser(id);
             return model;
         }
+
+        /// <summary>
+        /// Updates a user.
+        /// </summary>
+        /// <param name="id">The ID of the user to update.</param>
+        /// <param name="request">The update user request.</param>
+        /// <returns>The updated user model.</returns>
+        [HttpPut("{id}")]
+        public UserModel Put(Guid id, [FromBody] UpdateUserRequest request)
+        {
+            var model = userRepository.UpdateUser(id, request);
+            return model;
+        }
+
+        /// <summary>
+        /// Deletes a user.
+        /// </summary>
+        /// <param name="id">The ID of the user to delete.</param>
+        [HttpDelete("{id}")]
+        public void Delete(Guid id)
+        {
+            userRepository.DeleteUser(id);
+        }
+
+        /// <summary>
+        /// Locks a user.
+        /// </summary>
+        /// <param name="id">The ID of the user to lock.</param>
+        [HttpPut("lock/{id}")]
+        public void Lock(Guid id)
+        {
+            userRepository.LockUser(id);
+        }
+
+        /// <summary>
+        /// Unlocks a user.
+        /// </summary>
+        /// <param name="id">The ID of the user to unlock.</param>
+        [HttpPut("unlock/{id}")]
+        public void Unlock(Guid id)
+        {
+            userRepository.UnlockUser(id);
+        }
+
+
+
     }
 }
 

@@ -4,21 +4,31 @@ using tyf.data.service.Models;
 using tyf.data.service.Repositories;
 using tyf.data.service.Requests;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace tyf.data.service.Controllers
 {
+    /// <summary>
+    /// Controller for managing instances of schemas.
+    /// </summary>
     [Route("api/instance")]
     [ValidateAPIAccess(Constants.Roles.DataManager)]
     public class InstancesController : ControllerBase
     {
         private readonly IInstanceRepository instanceRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InstancesController"/> class.
+        /// </summary>
+        /// <param name="instanceRepository">The instance repository.</param>
         public InstancesController(IInstanceRepository instanceRepository)
         {
             this.instanceRepository = instanceRepository;
         }
-        // GET: api/values
+
+        /// <summary>
+        /// Gets the schema instance with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the schema instance to retrieve.</param>
+        /// <returns>The schema instance with the specified ID.</returns>
         [HttpGet("{id}")]
         public SchemaInstanceModel Get(Guid id)
         {
@@ -26,7 +36,11 @@ namespace tyf.data.service.Controllers
             return instanceModel;
         }
 
-        // GET api/values/5
+        /// <summary>
+        /// Filters the schema instances based on the specified filter criteria.
+        /// </summary>
+        /// <param name="request">The filter criteria.</param>
+        /// <returns>The filtered list of schema instances.</returns>
         [HttpPost("filter")]
         public InstanceListModel Filter([FromBody] FilterInstanceRequest request)
         {
@@ -34,15 +48,24 @@ namespace tyf.data.service.Controllers
             return listModel;
         }
 
-        // POST api/values
+        /// <summary>
+        /// Creates a new schema instance.
+        /// </summary>
+        /// <param name="request">The request containing the details of the new schema instance.</param>
+        /// <returns>The newly created schema instance.</returns>
         [HttpPost]
         public SchemaInstanceModel Post([FromBody] CreateInstanceRequest request)
         {
-            var instanceModel =instanceRepository.CreateInstance(request);
+            var instanceModel = instanceRepository.CreateInstance(request);
             return instanceModel;
         }
 
-        // PUT api/values/5
+        /// <summary>
+        /// Updates the schema instance with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the schema instance to update.</param>
+        /// <param name="request">The request containing the updated details of the schema instance.</param>
+        /// <returns>The updated schema instance.</returns>
         [HttpPut("{id}")]
         public SchemaInstanceModel Put(Guid id, [FromBody] UpdateInstanceRequest request)
         {
@@ -51,10 +74,15 @@ namespace tyf.data.service.Controllers
             return responseModel;
         }
 
-        // DELETE api/values/5
+        /// <summary>
+        /// Deletes the schema instance with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the schema instance to delete.</param>
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public StatusResponseModel Delete(Guid id)
         {
+            instanceRepository.DeleteInstance(id);
+            return new StatusResponseModel { Success = true };
         }
     }
 }

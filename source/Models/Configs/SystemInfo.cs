@@ -13,11 +13,6 @@
 		public required UserInfo AdminUser { get; set; }
 
 	}
-	public class UserInfo
-	{
-		public required string Name { get; set; }
-		public required string Email { get; set; }
-		public string? Contact { get; set; }
-	}
+	
 }
 

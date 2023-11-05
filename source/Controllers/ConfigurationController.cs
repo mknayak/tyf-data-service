@@ -10,22 +10,40 @@ using tyf.data.service.Requests;
 
 namespace tyf.data.service.Controllers
 {
+    /// <summary>
+    /// Controller for managing system and user-defined configurations.
+    /// </summary>
     [Route("api/[controller]")]
     public class ConfigurationController : ControllerBase
     {
         private readonly IConfigurationRepository configurationRepository;
         private readonly IUserRepository userRepository;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigurationController"/> class.
+        /// </summary>
+        /// <param name="configurationRepository"></param>
+        /// <param name="userRepository"></param>
         public ConfigurationController(IConfigurationRepository configurationRepository,IUserRepository userRepository)
         {
             this.configurationRepository = configurationRepository;
             this.userRepository = userRepository;
         }
+
+        /// <summary>
+        /// Gets the basic system information.
+        /// </summary>
+        /// <returns>The basic system information.</returns>
         [HttpGet("system")]
         public BasicSystemInfo System()
         {
             return configurationRepository.GetConfiguration<BasicSystemInfo>(Constants.ConfigKeys.SystemInformation)??new BasicSystemInfo { Installed=false };
         }
+
+        /// <summary>
+        /// Installs the application with the specified configuration.
+        /// </summary>
+        /// <param name="request">The installation request.</param>
+        /// <returns>The key-value pair of the configuration.</returns>
         [HttpPost("install")]
         public KeyValuePair<string,SystemInfo> Install([FromBody]InstallApplicationModel request)
         {
@@ -55,6 +73,11 @@ namespace tyf.data.service.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Gets the configuration value for the specified key.
+        /// </summary>
+        /// <param name="key">The configuration key.</param>
+        /// <returns>The configuration value.</returns>
         [HttpGet("{key}")]
         [ValidateAPIAccess(Constants.Roles.Administrator)]
         public object Get(string key)
@@ -64,6 +87,12 @@ namespace tyf.data.service.Controllers
                 throw new TechnicalException("SYS201", "Configuration Not Found.Key:"+key);
             return value;
         }
+
+        /// <summary>
+        /// Gets all configurations of the specified type.
+        /// </summary>
+        /// <param name="type">The configuration type.</param>
+        /// <returns>The dictionary of configurations.</returns>
         [HttpGet("all/{type}")]
         [ValidateAPIAccess(Constants.Roles.Administrator)]
         public Dictionary<string,object> Get(ConfigType type)
@@ -71,6 +100,13 @@ namespace tyf.data.service.Controllers
             var response = configurationRepository.GetAllConfigurations(type);
             return response;
         }
+
+        /// <summary>
+        /// Adds or updates the configuration value for the specified key.
+        /// </summary>
+        /// <param name="key">The configuration key.</param>
+        /// <param name="value">The configuration value.</param>
+        /// <returns>The updated configuration value.</returns>
         [HttpPost("{key}")]
         [ValidateAPIAccess(Constants.Roles.Administrator)]
         public object Get(string key, [FromBody] string value)
