@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Models.Stats;
 using tyf.data.service.Extensions;
 using tyf.data.service.Models;
 using tyf.data.service.Repositories;
@@ -15,15 +16,15 @@ namespace tyf.data.service.Controller
     [Route("api/schema")]
     public class SchemaController : ControllerBase
     {
-        private readonly IDataRepository repository;
+        private readonly ISchemaRepository repository;
         private readonly ILogger<SchemaController> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SchemaController"/> class.
         /// </summary>
         /// <param name="logger">The logger.</param>
-        /// <param name="repository">The data repository.</param>
-        public SchemaController(ILogger<SchemaController> logger, IDataRepository repository)
+        /// <param name="repository">The schema repository.</param>
+        public SchemaController(ILogger<SchemaController> logger, ISchemaRepository repository)
         {
             _logger = logger;
             this.repository = repository;
@@ -47,7 +48,7 @@ namespace tyf.data.service.Controller
         /// <param name="schemaId">The ID of the schema to get.</param>
         /// <returns>The schema with the specified ID.</returns>
         [HttpGet]
-        [Route("id/{schemaId}")]
+        [Route("{schemaId}")]
         public SchemaModel GetSchemaById(Guid schemaId)
         {
             var model = repository.GetSchemaById(schemaId);
@@ -70,42 +71,31 @@ namespace tyf.data.service.Controller
         /// <summary>
         /// Searches for schemas by name.
         /// </summary>
-        /// <param name="name">The name to search for.</param>
+        /// <param name="request">The search request.</param>
         /// <returns>A list of schemas matching the search criteria.</returns>
-        [HttpGet]
-        [Route("search/{name}")]
-        public SchemaListModel SearchSchema(string name)
+        [HttpPost]
+        [Route("search")]
+        public SchemaListModel SearchSchema(SearchSchemaRequest request)
         {
-            var response = repository.SearchSchema(name);
+            request.Page = request.Page <= 0 ? 1 : request.Page;
+            var response = repository.SearchSchema(request);
             return response;
-        }
+        }     
 
         /// <summary>
-        /// Gets a list of schemas under the specified namespace.
+        /// Retrieves statistics for the schema.
         /// </summary>
-        /// <param name="nameSpace">The namespace to filter by.</param>
-        /// <returns>A list of schemas under the specified namespace.</returns>
+        /// <param name="schemaId"></param>
+        /// <returns></returns>
         [HttpGet]
-        [Route("list/{namespace}")]
-        public SchemaListModel GetSchemasUnderNamespace(string nameSpace)
+        [Route("{schemaId}/stats")]
+        public SchemaStatisticsModel GetSchemaStatistics(Guid schemaId)
         {
-            var response = repository.FilterSchema(nameSpace);
-            return response;
+            var model = repository.GetSchemaStatistics(schemaId);
+            return model;
         }
-
-        /// <summary>
-        /// Searches for schemas by field.
-        /// </summary>
-        /// <param name="fieldName">The name of the field to search by.</param>
-        /// <param name="fieldValue">The value of the field to search for.</param>
-        /// <returns>A list of schemas matching the search criteria.</returns>
-        [HttpGet]
-        [Route("field/{fieldName}/{fieldValue}")]
-        public SchemaListModel SearchSchemaByField(string fieldName, string fieldValue)
-        {
-            var response = repository.SearchSchemaByField(fieldName, fieldValue);
-            return response;
-        }
-        
+           
     }
+
+    
 }

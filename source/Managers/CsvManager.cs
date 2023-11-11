@@ -6,20 +6,23 @@ using tyf.data.service.Requests;
 
 namespace tyf.data.service.Managers
 {
+    /// <summary>
+    /// Manager class for managing CSV files.
+    /// </summary>
     public class CsvManager : ICsvManager
     {
         private readonly IInstanceRepository instanceRepository;
-        private readonly IDataRepository dataRepository;
+        private readonly ISchemaRepository schemaRepository;
 
-        public CsvManager(IInstanceRepository repository, IDataRepository dataRepository)
+        public CsvManager(IInstanceRepository repository, ISchemaRepository schemaRepository)
         {
             this.instanceRepository = repository;
-            this.dataRepository = dataRepository;
+            this.schemaRepository = schemaRepository;
         }
 
         public bool UploadContent(UploadCsvRequest request)
         {
-            var schema = dataRepository.GetSchemaById(request.SchemaId);
+            var schema = schemaRepository.GetSchemaById(request.SchemaId);
             if (null == schema) throw new TechnicalException("CER-102", "Schema not found");
             int maxBulkInsert=200;
             using (var reader = new StreamReader(request.File.OpenReadStream()))

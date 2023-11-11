@@ -15,13 +15,13 @@ namespace tyf.data.service.Controllers
     [ValidateAPIAccess(Constants.Roles.DataManager)]
     public class SchemaFieldsController : ControllerBase
     {
-        private readonly IDataRepository repository;
+        private readonly ISchemaRepository repository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SchemaFieldsController"/> class.
         /// </summary>
-        /// <param name="repository">The data repository.</param>
-        public SchemaFieldsController(IDataRepository repository)
+        /// <param name="repository">The schema repository.</param>
+        public SchemaFieldsController(ISchemaRepository repository)
         {
             this.repository = repository;
         }

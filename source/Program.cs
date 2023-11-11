@@ -14,17 +14,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IInstanceRepository, InstanceRepository>();
-builder.Services.AddTransient<IDataRepository, DataRepository>();
+builder.Services.AddTransient<ISchemaRepository, SchemaRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IConfigurationRepository, ConfigurationRepository>();
 builder.Services.AddTransient<ISecurityManager, SecurityManager>();
 builder.Services.AddTransient<ICsvManager, CsvManager>();
 builder.Services.AddTransient<ICacheManager, CacheManager>();
-builder.Services.AddMemoryCache();
+
 builder.Services.AddDbContext<TyfDataContext>(option =>
 {
     option.UseNpgsql(builder.Configuration.GetConnectionString("dataDbConnection"));
 });
+builder.Services.AddMemoryCache();
+
 builder.Services.Configure<ErrorMessages>(
     builder.Configuration.GetSection(ErrorMessages.Key));
 builder.Services.Configure<SecurityOption>(
